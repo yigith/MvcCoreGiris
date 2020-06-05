@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcCoreGiris", "MvcCoreGiris\MvcCoreGiris.csproj", "{D99D1DAE-0A9A-43DB-98F4-4D792C427D24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D99D1DAE-0A9A-43DB-98F4-4D792C427D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99D1DAE-0A9A-43DB-98F4-4D792C427D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99D1DAE-0A9A-43DB-98F4-4D792C427D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99D1DAE-0A9A-43DB-98F4-4D792C427D24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69B2C34F-B5DB-4631-9E9C-CE62E287D793}
+	EndGlobalSection
+EndGlobal
