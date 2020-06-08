@@ -1,9 +1,17 @@
 ﻿@model List<Kisi>
+@inject LuckyNumberService lns
 @{
     ViewBag.Title = "Kişiler";
 }
 
 <h1>@ViewBag.Title</h1>
+
+@if (TempData["mesaj"] != null)
+{
+    <mesaj>
+        @TempData["mesaj"]
+    </mesaj>
+}
 
 <a asp-action="Yeni" class="btn btn-primary mb-2">
     <i class="fas fa-plus"></i> Yeni Kişi
@@ -34,6 +42,9 @@
 <form asp-action="Sil" name="silForm">
     <input type="hidden" name="id" />
 </form>
+
+<hr />
+Şanslı Sayınız: @lns.LuckyNumber
 
 @section scripts {
 <script>

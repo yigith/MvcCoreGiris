@@ -1,4 +1,5 @@
 ﻿@model MvcCoreGiris.Models.Kisi
+@inject LuckyNumberService SansliSayiHizmet
 
 @{
     ViewData["Title"] = "Yeni";
@@ -27,6 +28,10 @@
 <div>
     <a asp-action="Index">Listeye geri dön</a>
 </div>
+
+<hr />
+Şanslı Sayınız: @ViewBag.SansliSayi <br />
+Şanslı Sayınız: @SansliSayiHizmet.LuckyNumber
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

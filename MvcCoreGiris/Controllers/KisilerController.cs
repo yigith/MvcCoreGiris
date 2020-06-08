@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcCoreGiris.Models;
+using MvcCoreGiris.Services;
 
 namespace MvcCoreGiris.Controllers
 {
@@ -22,6 +23,8 @@ namespace MvcCoreGiris.Controllers
 
         public IActionResult Yeni()
         {
+            var lns = (LuckyNumberService)HttpContext.RequestServices.GetService(typeof(LuckyNumberService));
+            ViewBag.SansliSayi = lns.LuckyNumber;
             return View();
         }
 
@@ -33,6 +36,7 @@ namespace MvcCoreGiris.Controllers
             {
                 db.Add(kisi); //db.Kisiler.Add(kisi);
                 db.SaveChanges();
+                TempData["mesaj"] = $"\"{kisi.KisiAd}\" adlı kişi başarıyla eklenmiştir.";
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -63,6 +67,7 @@ namespace MvcCoreGiris.Controllers
                 // db.Entry(kisi).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.Update(kisi);
                 db.SaveChanges();
+                TempData["mesaj"] = $"\"{kisi.KisiAd}\" adlı kişinin bilgileri başarıyla güncellenmiştir.";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -86,6 +91,7 @@ namespace MvcCoreGiris.Controllers
 
             db.Remove(kisi);
             db.SaveChanges();
+            TempData["mesaj"] = $"\"{kisi.KisiAd}\" adlı kişi başarıyla silinmiştir.";
             return RedirectToAction(nameof(Index));
         }
     }
