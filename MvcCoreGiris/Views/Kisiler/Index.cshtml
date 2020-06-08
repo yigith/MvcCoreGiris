@@ -5,11 +5,16 @@
 
 <h1>@ViewBag.Title</h1>
 
+<a asp-action="Yeni" class="btn btn-primary mb-2">
+    <i class="fas fa-plus"></i> Yeni Kişi
+</a>
+
 <table class="table">
     <thead>
         <tr>
             <th>Id</th>
             <th>Kişi Adı</th>
+            <th>İşlemler</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +23,27 @@
             <tr>
                 <td>@item.Id</td>
                 <td>@item.KisiAd</td>
+                <td>
+                    <a asp-action="Duzenle" asp-route-id="@item.Id">Düzenle</a>
+                    <a href="#" onclick="sil(@item.Id, '@item.KisiAd')">Sil</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+<form asp-action="Sil" name="silForm">
+    <input type="hidden" name="id" />
+</form>
+
+@section scripts {
+<script>
+    function sil(id, kisiAd) {
+        event.preventDefault();
+
+        if (confirm('"' + kisiAd + '" adlı kişiyi silmek istediğinize emin misiniz?')) {
+            document.silForm.elements.id.value = id;
+            document.silForm.submit();
+        }
+    }
+</script>
+}
