@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Hava Durumu</h1>
+<form asp-action="SicaklikGetir" id="frmHavaDurumu">
+    @*https://getbootstrap.com/docs/4.4/components/forms/#auto-sizing*@
+    <div class="form-row align-items-center">
+        <div class="col-sm-2 my-1">
+            <label for="sehirAd" class="col-form-label">Şehir</label>
+        </div>
+        <div class="col-auto my-1">
+            <input id="sehirAd" name="sehirAd" type="text" class="form-control" required />
+        </div>
+        <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary">Getir</button>
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <label class="col-sm-2 col-form-label">Sıcaklık</label>
+        <label class="col-auto col-form-label">
+            <span id="sicaklik"></span>
+        </label>
+    </div>
+</form>
+
+<hr />
+<p class="font-weight-bold">Şehir adını yazar yazmaz sıcaklığı getirir.</p>
+<form id="frmHavaDurumu2" asp-action="SicaklikGetir" class="form-inline">
+    <label class="mb-2 mr-2">Şehir Adı:</label>
+    <input id="sehirAd2" name="sehirAd" type="text" class="form-control mb-2 mr-2" placeholder="Şehir Adı" />
+    <label id="sicaklik2" class="mb-2 mr-2"></label>
+</form>
+
+@section scripts {
+    <script>
+        $("form#frmHavaDurumu2").submit(function (e) {
+            e.preventDefault();
+        });
+
+        // ajax isteği yap
+        function sicaklikGetir2() {
+            var sehirAd = $("#sehirAd2").val().trim();
+
+            if (!sehirAd) {
+                $("#sicaklik2").text("");
+                return;
+            }
+
+            var frm = $("form#frmHavaDurumu2");
+
+            var url = frm.attr("action");
+            var data = frm.serialize();
+            $.post(url, data, function (result) {
+                $("#sicaklik2").text(sehirAd + " iline ait hava sıcaklığı: " + result.sicaklik + "°C");
+            }).fail(function () {
+                $("#sicaklik2").text("");
+            });
+        }
+
+        var lagSicaklikGetir2 = _.debounce(sicaklikGetir2, 500);
+
+        $("#sehirAd2").on("input", lagSicaklikGetir2);
+
+        $("form#frmHavaDurumu").submit(function (e) {
+            e.preventDefault();
+            var url = $(this).attr("action");
+            var data = $(this).serialize();
+            $.post(url, data, function (result) {
+                $("#sicaklik").text(result.sicaklik + "°C");
+            }).fail(function () {
+                $("#sicaklik").text("Veri alınamadı.");
+            });
+        });
+    </script>
+}

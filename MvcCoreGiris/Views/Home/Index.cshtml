@@ -1,9 +1,26 @@
-﻿@{
+﻿@inject MvcCoreGiris.Interfaces.IWeatherService weatherService
+@{
     ViewData["Title"] = "Home Page";
+    string sicaklik;
+    try
+    {
+        sicaklik = weatherService.Temperature("ankara") + "°C";
+    }
+    catch (Exception)
+    {
+        sicaklik = null;
+    }
+
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <mesaj kapat-goster="true">Hoşgeldiniz. Şanslı sayınız: @ViewBag.SansliSayi</mesaj>
+
+    @if (sicaklik != null)
+    {
+        <div>Ankara'da Hava Sıcaklığı: @sicaklik</div>
+    }
+
 </div>
